@@ -1,0 +1,54 @@
+<html>
+<head>
+    <script type="text/javascript">
+        function hideQuestions()
+        {
+            // Hide the questions
+            document.getElementById("answerBlock").style.display = "none";
+            // Show the message that the questions timed out
+            document.getElementById("quicker").style.display = "block";
+        }
+
+        function checkTime()
+        {
+            secondsLeft = secondsLeft - 1;
+            if(secondsLeft <= 0)
+            {
+                hideQuestions();
+                //alert("Time is up!");
+                document.getElementById("secondsLeft").style.color = "red";
+                window.clearInterval(myTimer);
+                writeTime("Timed out!");
+                // Here you'd probably want to do a redirect to another page
+            }
+            else
+            {
+                writeTime(secondsLeft + "s");
+            }
+        }
+
+        function writeTime(msg)
+        {
+            document.getElementById("secondsLeft").innerHTML = msg;
+        }
+    </script>
+</head>
+<body onload="">
+<h1>Timeout Exam Question: <span id="secondsLeft"></span></h1>
+<div id="answerBlock">
+<input id="answer1" name="answer1" type="text" /><br/>
+<input id="answer2" name="answer1" type="text" /><br/>
+<input id="answer3" name="answer1" type="text" /><br/>
+<input id="answer4" name="answer1" type="text" /><br/>
+<input type="button" name="submit" value="Answer Questions"/>
+</div>
+<div id="quicker" style="display:none;">
+You must answer more quickly next time!
+</div>
+</body>
+<script>
+    var secondsLeft = 10;
+    writeTime(secondsLeft + "s");
+    var myTimer = window.setInterval(checkTime, 1000);
+</script>
+</html>
